@@ -13,7 +13,7 @@ public interface AssessmentResultRepository extends JpaRepository<AssessmentResu
 
     @Query("SELECT new com.example.assessment_employees.dto.response.AssessmentResultResponse( " +
             "u.userId, u.fullName, ar.resultId, ar.assessmentPeriod, ar.totalScore, " +
-            "ard.detailId, ard.score, ard.comments, cb.criteriaName, cb.category) " +
+            "ard.detailId, ard.score, ar.comment, cb.criteriaName, cb.category) " +
             "FROM User u " +
             "JOIN AssessmentResult ar ON u.userId = ar.assessedUser.userId " +
             "JOIN AssessmentResultDetail ard ON ar.resultId = ard.result.resultId " +
@@ -24,7 +24,7 @@ public interface AssessmentResultRepository extends JpaRepository<AssessmentResu
 
     @Query("SELECT new com.example.assessment_employees.dto.response.AssessmentResultResponse( " +
             "u.userId, u.fullName, ar.resultId, ar.assessmentPeriod, ar.totalScore, " +
-            "ard.detailId, ard.score, ard.comments, cb.criteriaName, cb.category) " +
+            "ard.detailId, ard.score, ar.comment, cb.criteriaName, cb.category) " +
             "FROM User u " +
             "JOIN AssessmentResult ar ON u.userId = ar.assessedUser.userId " +
             "JOIN AssessmentResultDetail ard ON ar.resultId = ard.result.resultId " +

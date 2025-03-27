@@ -53,6 +53,9 @@ public class AssessmentResult {
     @Column(name = "status")
     private AssessmentStatus status = AssessmentStatus.DRAFT;
 
+    @Column(name = "comment")
+    private String comment;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
