@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giao diện đánh giá</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .error-message {
+        color: red;
+        font-size: 0.9em;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="card p-4 shadow-lg">
+        <h2 class="text-center mb-4">Đánh Giá</h2>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="evaluationTemplate" class="form-label"
+              >Mẫu đánh giá <span class="text-danger">*</span></label
+            >
+            <select id="evaluationTemplate" class="form-select">
+              <option value="">-- Chọn mẫu đánh giá --</option>
+              <option value="T3-2025">Đánh giá T3/2025</option>
+              <option value="T3-2024">Đánh giá T3/2024</option>
+            </select>
+            <div id="templateError" class="error-message">
+              Vui lòng chọn mẫu đánh giá.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="department" class="form-label"
+              >Phòng ban <span class="text-danger">*</span></label
+            >
+            <select id="department" class="form-select">
+              <option value="">-- Chọn phòng ban --</option>
+              <option value="Phòng hành chính">Phòng hành chính</option>
+              <option value="Phòng nhân sự">Phòng nhân sự</option>
+              <option value="Phòng hậu cần">Phòng hậu cần</option>
+              <option value="Phòng dự án">Phòng dự án</option>
+              <option value="Phòng kế toán">Phòng kế toán</option>
+            </select>
+            <div id="departmentError" class="error-message">
+              Vui lòng chọn phòng ban.
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <a href="index.html" class="btn btn-secondary">Quay về</a>
+          <button class="btn btn-primary" id="evaluateBtn">Đánh giá</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function redirectToEvaluate() {
+        const template = document.getElementById("evaluationTemplate").value;
+        const department = document.getElementById("department").value;
+        let isValid = true;
+
+        // Reset thông báo lỗi
+        document.getElementById("templateError").style.display = "none";
+        document.getElementById("departmentError").style.display = "none";
+
+        if (!template) {
+          document.getElementById("templateError").style.display = "block";
+          isValid = false;
+        }
+
+        if (!department) {
+          document.getElementById("departmentError").style.display = "block";
+          isValid = false;
+        }
+
+        if (isValid) {
+          window.location.href = `evaluate.html?template=${encodeURIComponent(
+            template
+          )}&department=${encodeURIComponent(department)}`;
+        }
+      }
+
+      document
+        .getElementById("evaluateBtn")
+        .addEventListener("click", redirectToEvaluate);
+
+      // Bắt sự kiện Enter
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          redirectToEvaluate();
+        }
+      });
+    </script>
+  </body>
+</html>

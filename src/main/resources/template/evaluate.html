@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Đánh Giá</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .card {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="card p-4 shadow-lg">
+        <h2 id="evaluationTitle" class="text-center mb-4"></h2>
+        <p id="departmentName" class="text-center text-muted"></p>
+        <h4 class="mt-4">Danh sách nhân viên</h4>
+        <div id="employeeTables"></div>
+        <nav>
+          <ul
+            class="pagination justify-content-center mt-4"
+            id="pagination"
+          ></ul>
+        </nav>
+        <div class="text-center mt-4">
+          <a href="Create_review.html" class="btn btn-secondary">Quay về</a>
+          <button class="btn btn-primary" id="saveBtn" disabled>
+            Lưu đánh giá
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const employees = [
+        "Nguyễn Văn A",
+        "Trần Thị B",
+        "Lê Văn C",
+        "Phạm Thị D",
+        "Hoàng Văn E",
+        "Đặng Thị F",
+      ];
+      const criteria = [
+        "Hiệu suất công việc",
+        "Thái độ làm việc",
+        "Đúng giờ",
+        "Kỹ năng giao tiếp",
+        "Tinh thần làm việc nhóm",
+        "Khả năng sáng tạo",
+      ];
+      const itemsPerPage = 5;
+      let currentPage = 1;
+      let isDataSaved = true;
+
+      function displayEmployees(page) {
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const visibleEmployees = employees.slice(startIndex, endIndex);
+        document.getElementById("employeeTables").innerHTML = visibleEmployees
+          .map((employee, empIndex) => {
+            const employeeId = startIndex + empIndex;
+            return `
+            <div class="card">
+              <div class="card-header"><h5 class="mb-0">Nhân viên: ${employee}</h5></div>
+              <div class="card-body">
+                <table class="table table-bordered table-hover">
+                  <thead><tr><th>Tiêu chí</th><th>Đánh giá</th></tr></thead>
+                  <tbody>
+                    ${criteria
+                      .map(
+                        (criterion, critIndex) => `
+                      <tr>
+                        <td>${criterion}</td>
+                        <td>
+                          <select class="form-select score" data-emp-id="${employeeId}" onchange="calculateAverage(${employeeId})">
+                            ${Array.from(
+                              { length: 11 },
+                              (_, i) => `<option value="${i}">${i}</option>`
+                            ).join("")}
+                          </select>
+                        </td>
+                      </tr>`
+                      )
+                      .join("")}
+                    <tr>
+                      <td><strong>Điểm trung bình</strong></td>
+                      <td><input type="text" class="form-control average-score" id="average-${employeeId}" readonly></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Nhận xét</strong></td>
+                      <td><textarea class="form-control" rows="2"></textarea></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>`;
+          })
+          .join("");
+      }
+
+      function setupPagination() {
+        const pageCount = Math.ceil(employees.length / itemsPerPage);
+        document.getElementById("pagination").innerHTML = `
+          <li class="page-item ${currentPage === 1 ? "disabled" : ""}">
+            <a class="page-link" href="#" onclick="changePage(${
+              currentPage - 1
+            })">Trước</a>
+          </li>
+          ${Array.from(
+            { length: pageCount },
+            (_, i) => `
+            <li class="page-item ${i + 1 === currentPage ? "active" : ""}">
+              <a class="page-link" href="#" onclick="changePage(${i + 1})">${
+              i + 1
+            }</a>
+            </li>`
+          ).join("")}
+          <li class="page-item ${currentPage === pageCount ? "disabled" : ""}">
+            <a class="page-link" href="#" onclick="changePage(${
+              currentPage + 1
+            })">Sau</a>
+          </li>`;
+      }
+
+      function changePage(page) {
+        if (page < 1 || page > Math.ceil(employees.length / itemsPerPage))
+          return;
+        currentPage = page;
+        displayEmployees(page);
+        setupPagination();
+      }
+
+      function calculateAverage(empId) {
+        const scores = document.querySelectorAll(
+          `.score[data-emp-id='${empId}']`
+        );
+        let total = 0;
+        scores.forEach((select) => (total += parseInt(select.value)));
+        const avg = total / scores.length;
+        document.getElementById(`average-${empId}`).value = avg.toFixed(2);
+        isDataSaved = false;
+        document.getElementById("saveBtn").disabled = false;
+      }
+
+      document.getElementById("saveBtn").addEventListener("click", function () {
+        let evaluations = Array.from(
+          document.querySelectorAll("#employeeTables .card"),
+          (card, index) => {
+            return {
+              name: card
+                .querySelector("h5")
+                .innerText.replace("Nhân viên: ", ""),
+              scores: Array.from(card.querySelectorAll(".score"), (select) =>
+                parseInt(select.value)
+              ),
+              average: parseFloat(card.querySelector(".average-score").value),
+              comment: card.querySelector("textarea").value.trim(),
+            };
+          }
+        );
+
+        localStorage.setItem(
+          "employeeEvaluations",
+          JSON.stringify(evaluations)
+        );
+        alert("Đánh giá đã được lưu!");
+        isDataSaved = true;
+        document.getElementById("saveBtn").disabled = true;
+      });
+
+      window.addEventListener("beforeunload", function (event) {
+        if (!isDataSaved) {
+          event.preventDefault();
+          event.returnValue =
+            "Bạn có chắc chắn muốn rời khỏi trang mà không lưu đánh giá?";
+        }
+      });
+
+      window.onload = function () {
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById("evaluationTitle").innerText = `Đánh giá: ${
+          params.get("template") || "Không xác định"
+        }`;
+        document.getElementById("departmentName").innerText = `Phòng ban: ${
+          params.get("department") || "Không xác định"
+        }`;
+        displayEmployees(currentPage);
+        setupPagination();
+      };
+    </script>
+  </body>
+</html>

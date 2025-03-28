@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thêm Nhân Viên Mới</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <style>
+      .form-group {
+        position: relative;
+      }
+      .form-group .bi {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        color: gray;
+      }
+      .error-message {
+        color: red;
+        font-size: 0.875rem;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="card">
+        <div class="card-header bg-primary text-white text-center">
+          <h4>Thêm Nhân Viên Mới</h4>
+        </div>
+        <div class="card-body">
+          <form id="employeeForm">
+            <div class="mb-3 form-group">
+              <label for="username" class="form-label">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="Nhập username"
+                required
+              />
+              <i class="bi bi-person"></i>
+              <div class="error-message">Username không được để trống</div>
+            </div>
+
+            <div class="mb-3 form-group">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Nhập mật khẩu"
+                required
+              />
+              <i class="bi bi-lock"></i>
+              <div class="error-message">
+                Mật khẩu phải có ít nhất 6 ký tự, bao gồm chữ và số
+              </div>
+            </div>
+
+            <div class="mb-3 form-group">
+              <label for="confirmPassword" class="form-label"
+                >Xác nhận mật khẩu</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPassword"
+                placeholder="Nhập lại mật khẩu"
+                required
+              />
+              <i class="bi bi-lock-fill"></i>
+              <div class="error-message">Mật khẩu nhập lại không khớp</div>
+            </div>
+
+            <div class="mb-3 form-group">
+              <label for="fullname" class="form-label">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="fullname"
+                placeholder="Nhập họ và tên"
+                required
+              />
+              <i class="bi bi-person-badge"></i>
+              <div class="error-message">Họ và tên chỉ được chứa chữ cái</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="role" class="form-label">Role</label>
+              <select class="form-select" id="role" required>
+                <option value="" selected>Chọn vai trò</option>
+                <option value="admin">Admin</option>
+                <option value="manager">Supervisor</option>
+                <option value="employee">Employee</option>
+              </select>
+              <div class="error-message">Vui lòng chọn vai trò</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="department" class="form-label">Phòng Ban</label>
+              <select class="form-select" id="department" required>
+                <option value="" selected>Chọn phòng ban</option>
+                <option value="hanhchinh">Phòng Hành Chính</option>
+                <option value="nhansu">Phòng Nhân Sự</option>
+                <option value="haucan">Phòng Hậu Cần</option>
+                <option value="duan">Phòng Dự Án</option>
+                <option value="ketoan">Phòng Kế Toán</option>
+              </select>
+              <div class="error-message">Vui lòng chọn phòng ban</div>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100 mb-2">
+              Lưu
+            </button>
+            <button
+              type="button"
+              id="cancelButton"
+              class="btn btn-secondary w-100"
+            >
+              Hủy
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("employeeForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          let isValid = true;
+
+          function showError(input, message) {
+            const errorDiv = input.parentNode.querySelector(".error-message");
+            errorDiv.textContent = message;
+            errorDiv.style.display = "block";
+            input.classList.add("is-invalid");
+          }
+
+          function hideError(input) {
+            const errorDiv = input.parentNode.querySelector(".error-message");
+            errorDiv.style.display = "none";
+            input.classList.remove("is-invalid");
+          }
+
+          const department = document.getElementById("department");
+          if (department.value === "") {
+            showError(department, "Vui lòng chọn phòng ban");
+            isValid = false;
+          } else {
+            hideError(department);
+          }
+
+          if (isValid) {
+            fetch("/api/employees", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                username: username.value,
+                password: password.value,
+                fullname: fullname.value,
+                department: department.value,
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => alert("Thêm nhân viên thành công!"))
+              .catch((error) => alert("Lỗi khi thêm nhân viên!"));
+          }
+        });
+
+      document
+        .getElementById("cancelButton")
+        .addEventListener("click", function () {
+          if (confirm("Bạn có chắc chắn muốn hủy không?")) {
+            history.back();
+          }
+        });
+    </script>
+  </body>
+</html>
