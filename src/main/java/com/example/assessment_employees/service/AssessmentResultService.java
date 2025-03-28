@@ -23,7 +23,6 @@ public class AssessmentResultService {
     private AssessmentResultRepository resultRepository;
     @Autowired
     private AssessmentTemplateRepository templateRepository;
-    @Autowired
 
     public List<AssessmentResult> getAllResults() {
         return resultRepository.findAll();
