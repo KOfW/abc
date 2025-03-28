@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AssessmentResultRepository extends JpaRepository<AssessmentResult, Long> {
+public interface AssessmentResultRepository extends JpaRepository<AssessmentResult, Integer> {
 
     @Query("SELECT new com.example.assessment_employees.dto.response.AssessmentResultResponse( " +
             "u.userId, u.fullName, ar.resultId, ar.assessmentPeriod, ar.totalScore, " +
