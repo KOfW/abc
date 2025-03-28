@@ -37,6 +37,13 @@ public class UserService {
         return userMapper.toResponse(user);
     }
 
+    public List<UserResponse> getUserByDepartmentId(Integer id) {
+        return userRepository.findByDepartment_DepartmentId(id)
+                .stream()
+                .map(userMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public UserResponse createUser(UserRequest userRequest) {
         if (userRepository.existsByUsername(userRequest.getUsername()))
@@ -87,4 +94,6 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
+
+
 } 

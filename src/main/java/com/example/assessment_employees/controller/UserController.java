@@ -61,4 +61,10 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.ok(new ApiResponse<>(true, "User deleted successfully", null));
     }
-} 
+
+    @GetMapping("/departments/{id}")
+    public ResponseEntity<ApiResponse<List<UserResponse>>> getUserByDepartmentId(@PathVariable Integer id) {
+        List<UserResponse> users = userService.getUserByDepartmentId(id);
+        return ResponseEntity.ok(new ApiResponse<>(true, "Users retrieved successfully", users));
+    }
+}

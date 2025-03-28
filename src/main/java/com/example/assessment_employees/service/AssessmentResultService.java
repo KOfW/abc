@@ -1,7 +1,7 @@
 package com.example.assessment_employees.service;
 
-
 import com.example.assessment_employees.dto.request.AssessmentResultRequest;
+import com.example.assessment_employees.dto.response.AssessmentResultResponse;
 import com.example.assessment_employees.entity.AssessmentResult;
 import com.example.assessment_employees.entity.AssessmentTemplate;
 import com.example.assessment_employees.entity.User;
@@ -18,15 +18,13 @@ import java.util.Optional;
 public class AssessmentResultService {
 
     @Autowired
-    private AssessmentResultRepository resultRepository;
-
-    @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private AssessmentResultRepository resultRepository;
     @Autowired
     private AssessmentTemplateRepository templateRepository;
+    @Autowired
 
-    // Lấy danh sách tất cả kết quả đánh giá
     public List<AssessmentResult> getAllResults() {
         return resultRepository.findAll();
     }
@@ -35,28 +33,6 @@ public class AssessmentResultService {
     public AssessmentResult getResultById(Integer id) {
         return resultRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Assessment Result not found"));
-    }
-
-    // Tạo mới kết quả đánh giá
-    public AssessmentResult createAssessmentResult(AssessmentResultRequest dto) {
-        User assessedUser = userRepository.findById(dto.getAssessedUserId())
-                .orElseThrow(() -> new RuntimeException("Assessed user not found"));
-
-        User assessorUser = userRepository.findById(dto.getAssessorUserId())
-                .orElseThrow(() -> new RuntimeException("Assessor user not found"));
-
-        AssessmentTemplate template = templateRepository.findById(dto.getTemplateId())
-                .orElseThrow(() -> new RuntimeException("Template not found"));
-
-        AssessmentResult result = new AssessmentResult();
-        result.setAssessedUser(assessorUser);
-        result.setAssessorUser(assessorUser);
-        result.setTemplate(template);
-        result.setAssessmentPeriod(dto.getAssessmentPeriod());
-        result.setTotalScore(dto.getTotalScore());
-        result.setStatus(dto.getStatus());
-
-        return resultRepository.save(result);
     }
 
     // Cập nhật kết quả đánh giá

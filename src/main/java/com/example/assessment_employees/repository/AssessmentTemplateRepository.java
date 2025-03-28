@@ -22,4 +22,6 @@ public interface AssessmentTemplateRepository extends JpaRepository<AssessmentTe
            "LEFT JOIN FETCH t.templateCriteriaMappings m " +
            "LEFT JOIN FETCH m.criteria")
     List<AssessmentTemplate> findAllWithCriteria();
+
+
 }
