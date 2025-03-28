@@ -5,7 +5,7 @@ import com.example.assessment_employees.entity.AssessmentResult;
 import com.example.assessment_employees.entity.AssessmentResultDetail;
 import com.example.assessment_employees.entity.CriteriaBank;
 import com.example.assessment_employees.repository.AssessmentResultDetailRepository;
-import com.example.assessment_employees.repository.AssessmentResultRepository;
+import com.example.assessment_employees.repository.HistoryAssessmentEmployeeRepository;
 import com.example.assessment_employees.repository.CriteriaBankRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +21,7 @@ public class AssessmentResultDetailService {
 
     private final AssessmentResultDetailRepository detailRepository;
 
-    private final AssessmentResultRepository resultRepository;
+    private final HistoryAssessmentEmployeeRepository resultRepository;
 
     private final CriteriaBankRepository criteriaRepository;
 

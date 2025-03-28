@@ -1,13 +1,11 @@
 package com.example.assessment_employees.dto.response;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Data
-public class AssessmentResultResponse {
+public class HistoryAssessmentEmployeeResponse {
     private Integer id;
     private String name;
     private Integer departmentId;
@@ -19,12 +17,13 @@ public class AssessmentResultResponse {
     private String assessmentDate;
     private String comments;
 
-    public AssessmentResultResponse() {}
+    public HistoryAssessmentEmployeeResponse() {}
 
     // Constructor khớp với danh sách tham số
-    public AssessmentResultResponse(Integer id, String name, Integer departmentId, String jobTitle,
-                                    BigDecimal score, Integer assessmentId, Integer performanceRating,
-                                    String feedback, String assessmentDate, String comments) {
+    public HistoryAssessmentEmployeeResponse(Integer id, String name, Integer departmentId, String jobTitle,
+                                             BigDecimal score, Integer assessmentId, Integer performanceRating,
+                                             String feedback, String assessmentDate, String comments){
+
         this.id = id;
         this.name = name;
         this.departmentId = departmentId;
@@ -36,6 +35,7 @@ public class AssessmentResultResponse {
         this.assessmentDate = assessmentDate;
         this.comments = comments;
     }
+
 
 }
 

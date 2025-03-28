@@ -1,11 +1,10 @@
 package com.example.assessment_employees.service;
 
 import com.example.assessment_employees.dto.request.AssessmentResultRequest;
-import com.example.assessment_employees.dto.response.AssessmentResultResponse;
 import com.example.assessment_employees.entity.AssessmentResult;
 import com.example.assessment_employees.entity.AssessmentTemplate;
 import com.example.assessment_employees.entity.User;
-import com.example.assessment_employees.repository.AssessmentResultRepository;
+import com.example.assessment_employees.repository.HistoryAssessmentEmployeeRepository;
 import com.example.assessment_employees.repository.AssessmentTemplateRepository;
 import com.example.assessment_employees.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class AssessmentResultService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private AssessmentResultRepository resultRepository;
+    private HistoryAssessmentEmployeeRepository resultRepository;
     @Autowired
     private AssessmentTemplateRepository templateRepository;
 
