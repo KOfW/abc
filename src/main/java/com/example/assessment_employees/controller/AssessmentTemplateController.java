@@ -87,4 +87,6 @@ public class AssessmentTemplateController {
         return ResponseEntity.ok(new ApiResponse<>(true, "Criteria added to template successfully", 
                 templateService.addCriteriaToTemplate(id, criteriaIds)));
     }
+
+
 } 
