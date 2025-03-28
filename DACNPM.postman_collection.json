@@ -1,0 +1,605 @@
+{
+	"info": {
+		"_postman_id": "b04ed7c6-36e0-4084-a997-f0739207a390",
+		"name": "DACNPM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25930289"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"hoanghuy\",\r\n    \"password\" : \"123456\",\r\n    \"fullName\" : \"Hoang Huy\",\r\n    \"email\" : \"huy@gmail.com\",\r\n    \"departmentId\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"hoanghuy\",\r\n    \"password\" : \"123456\",\r\n    \"fullName\" : \"Hoang Huy\",\r\n    \"email\" : \"huy@gmail.com\",\r\n    \"departmentId\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Criteria",
+			"item": [
+				{
+					"name": "Create criteria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"criteriaName\": \"Tính trung thực\",\r\n    \"category\": \"Thái độ\",\r\n    \"description\": \"Sự chân thành, minh bạch và đáng tin cậy trong công việc.\",\r\n    \"defaultMaxScore\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/criteria",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"criteria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All criteria",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/criteria",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"criteria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get criteria by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/criteria/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"criteria",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Criteria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/criteria/10",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"criteria",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Criteria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"criteriaName\": \"Tính trung thực\",\r\n    \"category\": \"Thái độ\",\r\n    \"description\": \"Sự chân thành, minh bạch và độ đáng tin cậy trong công việc.\",\r\n    \"defaultMaxScore\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/criteria/11",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"criteria",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assessment Template",
+			"item": [
+				{
+					"name": "Create template",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"templateName\": \"Bảng đánh giá nhân viên tháng 2\",\r\n    \"description\": \"Đánh giá chi tiết nhân viên trong tháng 2\",\r\n    \"criteriaIds\" : [2,3,4,5,6,7,8,9]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/templates",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clone template",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/templates/5/clone",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"templates",
+								"5",
+								"clone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Criteria To Template",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/templates/7/criteria/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"templates",
+								"7",
+								"criteria",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Batch Criteria To Template",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[1,11]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/templates/5/criteria/batch",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"templates",
+								"5",
+								"criteria",
+								"batch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Criteria From Template",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/templates/7/criteria/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"templates",
+								"7",
+								"criteria",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get template by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/templates/5",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"templates",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All template",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/templates",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete template",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/templates/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"templates",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update template",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"templateName\": \"Bảng đánh giá nhân viên tháng 3\",\r\n    \"description\": \"Đánh giá chi tiết nhân viên trong tháng 3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/templates/7",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"templates",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
