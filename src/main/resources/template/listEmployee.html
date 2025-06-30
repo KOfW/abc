@@ -1,168 +1,220 @@
 <!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Quản Lý Nhân Viên</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
     />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  </head>
-  <body>
-    <div class="container mt-5">
-      <div class="card">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card">
         <div class="card-header bg-dark text-white text-center">
-          <h4>Danh Sách Nhân Viên</h4>
-          <input
-            type="text"
-            id="search"
-            class="form-control mt-2"
-            placeholder="Tìm kiếm..."
-          />
+            <h4>Danh Sách Nhân Viên</h4>
+            <input
+                    type="text"
+                    id="search"
+                    class="form-control mt-2"
+                    placeholder="Tìm kiếm..."
+            />
         </div>
         <div class="card-body">
-          <!-- Nút Quay Lại và Thêm Nhân Viên -->
-          <div class="mb-3 d-flex justify-content-between">
-            <button
-              class="btn btn-secondary"
-              onclick="window.location.href='index.html'"
-            >
-              Quay Lại
-            </button>
-            <button
-              class="btn btn-primary"
-              onclick="window.location.href='Add_employee.html'"
-            >
-              Thêm Nhân Viên
-            </button>
-          </div>
+            <!-- Nút Quay Lại và Thêm Nhân Viên -->
+            <div class="mb-3 d-flex justify-content-between">
+                <button
+                        class="btn btn-secondary"
+                        onclick="window.location.href='index.html'"
+                >
+                    Quay Lại
+                </button>
+                <button
+                        class="btn btn-primary"
+                        onclick="window.location.href='Add_employee.html'"
+                >
+                    Thêm Nhân Viên
+                </button>
+            </div>
 
-          <!-- Bảng Nhân Viên -->
-          <table class="table table-bordered table-striped text-center">
-            <thead class="table-dark">
-              <tr>
-                <th>#</th>
-                <th>Username</th>
-                <th>Full Name</th>
-                <th>Role</th>
-                <th>Phòng Ban</th>
-                <th>Thông Tin</th>
-                <th>Chỉnh Sửa</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-          </table>
+            <!-- Bảng Nhân Viên -->
+            <table class="table table-bordered table-striped text-center">
+                <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Full Name</th>
+                    <th>Role</th>
+                    <th>Phòng Ban</th>
+                    <th>Thông Tin</th>
+                    <th>Chỉnh Sửa</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
 
-          <!-- Phân trang -->
-          <div class="d-flex justify-content-center mt-3">
-            <button class="btn btn-secondary me-2" id="prevPage">
-              Trang Trước
-            </button>
-            <span id="pageInfo" class="align-self-center"></span>
-            <button class="btn btn-secondary ms-2" id="nextPage">
-              Trang Tiếp
-            </button>
-          </div>
+            <!-- Phân trang -->
+            <div class="d-flex justify-content-center mt-3">
+                <button class="btn btn-secondary me-2" id="prevPage">
+                    Trang Trước
+                </button>
+                <span id="pageInfo" class="align-self-center"></span>
+                <button class="btn btn-secondary ms-2" id="nextPage">
+                    Trang Tiếp
+                </button>
+            </div>
         </div>
-      </div>
     </div>
+</div>
 
-    <script>
-      let employees = [
+<script>
+    let employees = [
         {
-          username: "user1",
-          fullName: "Nguyễn Văn A",
-          role: "Admin",
-          department: "Hành Chính",
+            username: "user1",
+            fullName: "Nguyễn Văn A",
+            role: "Admin",
+            department: "Hành Chính",
         },
         {
-          username: "user2",
-          fullName: "Trần Thị B",
-          role: "Nhân Viên",
-          department: "Nhân Sự",
+            username: "user2",
+            fullName: "Trần Thị B",
+            role: "Nhân Viên",
+            department: "Nhân Sự",
         },
         {
-          username: "user3",
-          fullName: "Lê Văn C",
-          role: "Nhân Viên",
-          department: "Hậu Cần",
+            username: "user3",
+            fullName: "Lê Văn C",
+            role: "Nhân Viên",
+            department: "Hậu Cần",
         },
         {
-          username: "user4",
-          fullName: "Phạm Văn D",
-          role: "Nhân Viên",
-          department: "Kế Toán",
+            username: "user4",
+            fullName: "Phạm Văn D",
+            role: "Nhân Viên",
+            department: "Kế Toán",
         },
         {
-          username: "user5",
-          fullName: "Hoàng Thị E",
-          role: "Nhân Viên",
-          department: "Kinh Doanh",
+            username: "user5",
+            fullName: "Hoàng Thị E",
+            role: "Nhân Viên",
+            department: "Kinh Doanh",
         },
         {
-          username: "user6",
-          fullName: "Đỗ Văn F",
-          role: "Admin",
-          department: "IT",
+            username: "user6",
+            fullName: "Đỗ Văn F",
+            role: "Admin",
+            department: "IT",
         },
         {
-          username: "user7",
-          fullName: "Bùi Thị G",
-          role: "Nhân Viên",
-          department: "Marketing",
+            username: "user7",
+            fullName: "Bùi Thị G",
+            role: "Nhân Viên",
+            department: "Marketing",
         },
         {
-          username: "user8",
-          fullName: "Nguyễn Văn A",
-          role: "Admin",
-          department: "Hành Chính",
+            username: "user8",
+            fullName: "Nguyễn Văn A",
+            role: "Admin",
+            department: "Hành Chính",
         },
         {
-          username: "user9",
-          fullName: "Trần Thị B",
-          role: "Nhân Viên",
-          department: "Nhân Sự",
+            username: "user9",
+            fullName: "Trần Thị B",
+            role: "Nhân Viên",
+            department: "Nhân Sự",
         },
         {
-          username: "user10",
-          fullName: "Lê Văn C",
-          role: "Nhân Viên",
-          department: "Hậu Cần",
+            username: "user10",
+            fullName: "Lê Văn C",
+            role: "Nhân Viên",
+            department: "Hậu Cần",
         },
         {
-          username: "user11",
-          fullName: "Phạm Văn D",
-          role: "Nhân Viên",
-          department: "Kế Toán",
+            username: "user11",
+            fullName: "Phạm Văn D",
+            role: "Nhân Viên",
+            department: "Kế Toán",
         },
         {
-          username: "user12",
-          fullName: "Hoàng Thị E",
-          role: "Nhân Viên",
-          department: "Kinh Doanh",
+            username: "user12",
+            fullName: "Hoàng Thị E",
+            role: "Nhân Viên",
+            department: "Kinh Doanh",
         },
         {
-          username: "user13",
-          fullName: "Đỗ Văn F",
-          role: "Admin",
-          department: "IT",
+            username: "user13",
+            fullName: "Đỗ Văn F",
+            role: "Admin",
+            department: "IT",
         },
         {
-          username: "user14",
-          fullName: "Bùi Thị G",
-          role: "Nhân Viên",
-          department: "Marketing",
+            username: "user14",
+            fullName: "Bùi Thị G",
+            role: "Nhân Viên",
+            department: "Marketing",
         },
-      ];
+    ];
+    const employeeReviews = {
+        user1: [
+            {period: "T1/2024", date: "2024-01-10", scores: [8, 9, 7, 8], comment: "Làm tốt"},
+            {period: "T2/2024", date: "2024-02-15", scores: [7, 8, 7, 7], comment: "Cần cải thiện"}
+        ],
+        user2: [
+            {period: "T3/2024", date: "2024-03-05", scores: [9, 9, 9, 9], comment: "Xuất sắc"}
+        ],
+        user3: [
+            {period: "T4/2024", date: "2024-04-12", scores: [6, 7, 6, 5], comment: "Hiệu suất chưa cao"},
+            {period: "T5/2024", date: "2024-05-20", scores: [7, 8, 7, 8], comment: "Đã cải thiện"},
+            {period: "T6/2024", date: "2024-06-25", scores: [8, 8, 8, 8], comment: "Ổn định"}
+        ],
+        user4: [
+            {period: "T1/2024", date: "2024-01-18", scores: [9, 8, 8, 9], comment: "Tốt trong dự án nhóm"}
+        ],
+        user5: [
+            {period: "T3/2024", date: "2024-03-10", scores: [6, 6, 7, 6], comment: "Thiếu chủ động"},
+            {period: "T4/2024", date: "2024-04-15", scores: [7, 7, 7, 7], comment: "Tiến bộ nhẹ"}
+        ],
+        user6: [
+            {period: "T5/2024", date: "2024-05-08", scores: [8, 9, 9, 8], comment: "Hiệu quả cao"},
+            {period: "T6/2024", date: "2024-06-09", scores: [9, 9, 9, 10], comment: "Xuất sắc"}
+        ],
+        user7: [
+            {period: "T2/2024", date: "2024-02-22", scores: [7, 6, 6, 7], comment: "Trung bình"}
+        ],
+        user8: [
+            {period: "T3/2024", date: "2024-03-25", scores: [8, 8, 8, 9], comment: "Đồng đều"},
+            {period: "T4/2024", date: "2024-04-30", scores: [9, 9, 8, 8], comment: "Tốt"},
+            {period: "T5/2024", date: "2024-05-18", scores: [10, 9, 9, 10], comment: "Xuất sắc vượt trội"}
+        ],
+        user9: [
+            {period: "T1/2024", date: "2024-01-11", scores: [6, 7, 5, 6], comment: "Mới vào, còn yếu"}
+        ],
+        user10: [
+            {period: "T2/2024", date: "2024-02-16", scores: [8, 8, 7, 7], comment: "Tốt hơn kỳ trước"}
+        ],
+        user11: [
+            {period: "T3/2024", date: "2024-03-12", scores: [9, 9, 8, 8], comment: "Ổn định"},
+            {period: "T4/2024", date: "2024-04-20", scores: [8, 8, 9, 9], comment: "Làm việc nhóm tốt"}
+        ],
+        user12: [
+            {period: "T2/2024", date: "2024-02-28", scores: [7, 6, 6, 7], comment: "Bị trễ deadline vài lần"}
+        ],
+        user13: [
+            {period: "T3/2024", date: "2024-03-10", scores: [10, 9, 9, 10], comment: "Nhân sự chủ chốt"}
+        ],
+        user14: [
+            {period: "T1/2024", date: "2024-01-05", scores: [8, 8, 8, 8], comment: "Tốt"},
+            {period: "T2/2024", date: "2024-02-10", scores: [9, 9, 9, 9], comment: "Nổi bật"}
+        ]
+    };
+    let currentPage = 1;
+    const itemsPerPage = 10;
 
-      let currentPage = 1;
-      const itemsPerPage = 10;
-
-      // Hiển thị danh sách nhân viên với phân trang
-      function renderTable() {
+    // Hiển thị danh sách nhân viên với phân trang
+    function renderTable() {
         const tableBody = $("#tableBody");
         tableBody.empty();
 
@@ -171,7 +223,7 @@
         let paginatedItems = employees.slice(start, end);
 
         paginatedItems.forEach((emp, index) => {
-          tableBody.append(`
+            tableBody.append(`
             <tr>
               <td>${start + index + 1}</td>
               <td>${emp.username}</td>
@@ -180,73 +232,80 @@
               <td>${emp.department}</td>
               <td>
                 <button class="btn btn-info btn-sm" onclick="viewInfo('${
-                  emp.username
-                }')">Xem</button>
+                emp.username
+            }')">Xem</button>
               </td>
               <td>
                 <button class="btn btn-warning btn-sm" onclick="editEmployee('${
-                  emp.username
-                }')">Chỉnh Sửa</button>
+                emp.username
+            }')">Chỉnh Sửa</button>
               </td>
               <td>
                 <button class="btn btn-danger btn-sm" onclick="confirmDelete('${
-                  emp.username
-                }')">Xóa</button>
+                emp.username
+            }')">Xóa</button>
               </td>
             </tr>
           `);
         });
 
         $("#pageInfo").text(
-          `Trang ${currentPage} / ${Math.ceil(employees.length / itemsPerPage)}`
+            `Trang ${currentPage} / ${Math.ceil(employees.length / itemsPerPage)}`
         );
-      }
+    }
 
-      // Xử lý nút phân trang
-      $("#prevPage").click(() => {
+    // Xử lý nút phân trang
+    $("#prevPage").click(() => {
         if (currentPage > 1) {
-          currentPage--;
-          renderTable();
+            currentPage--;
+            renderTable();
         }
-      });
+    });
 
-      $("#nextPage").click(() => {
+    $("#nextPage").click(() => {
         if (currentPage < Math.ceil(employees.length / itemsPerPage)) {
-          currentPage++;
-          renderTable();
+            currentPage++;
+            renderTable();
         }
-      });
+    });
 
-      // Xử lý tìm kiếm
-      $("#search").on("keyup", function () {
+    // Xử lý tìm kiếm
+    $("#search").on("keyup", function () {
         let value = $(this).val().toLowerCase();
         $("#tableBody tr").filter(function () {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
-      });
+    });
 
-      // Chỉnh sửa nhân viên
-      function editEmployee(username) {
+    // Chỉnh sửa nhân viên
+    function editEmployee(username) {
         window.location.href = `Edit_Employee.html?user=${username}`;
-      }
+    }
 
-      // Xóa nhân viên
-      function confirmDelete(username) {
+    // Xóa nhân viên
+    function confirmDelete(username) {
         if (confirm("Bạn có chắc chắn muốn xóa nhân viên này không?")) {
-          employees = employees.filter((emp) => emp.username !== username);
-          renderTable();
-          alert("Nhân viên đã được xóa!");
+            employees = employees.filter((emp) => emp.username !== username);
+            renderTable();
+            alert("Nhân viên đã được xóa!");
         }
-      }
+    }
 
-      // Xem thông tin nhân viên
-      function viewInfo(username) {
+    // Xem thông tin nhân viên
+    function viewInfo(username) {
+
+
+        const reviews = employeeReviews[username] || [];
+        localStorage.setItem("selectedReviews", JSON.stringify(reviews));
+        localStorage.setItem("allEmployeeReviews", JSON.stringify(employeeReviews));
+
         window.location.href = `employee_info.html?user=${username}`;
-      }
+    }
 
-      $(document).ready(() => {
+    $(document).ready(() => {
         renderTable();
-      });
-    </script>
-  </body>
+    });
+
+</script>
+</body>
 </html>
